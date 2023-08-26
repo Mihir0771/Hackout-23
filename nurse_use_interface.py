@@ -63,7 +63,7 @@ symptoms.place(relx=0.6, rely=0.6)
 symptoms_entry_box = Entry(nroot)
 symptoms_entry_box.place(relx=0.7, rely=0.6)
 
-send_button = Button(nroot, text="Send to the doctor", command=send)
+send_button = Button(nroot, text="Send to the doctor", command=lambda: [send(), nroot.destroy()])
 send_button.place(relx=0.4, rely=0.9)
 
 quit_button = Button(nroot, text="Quit", command=quit)

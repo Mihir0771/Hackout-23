@@ -144,7 +144,7 @@ def login():
     id_label = Label(win, text="ID")
     id_label.place(relx=0.4, rely=0.4)
 
-    id_entry_box = Entry(win)
+    id_entry_box = Entry(win, show="*")
     id_entry_box.place(relx=0.5, rely=0.4)
 
     password_label = Label(win, text="Password")

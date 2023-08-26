@@ -2,6 +2,7 @@ import sqlite3
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
+import Appointment
 
 global password, username, age, date_of_birth, aadhar_card_number, last_name, first_name
 
@@ -104,7 +105,7 @@ def dashboard():
     profile_first_name_label.place(relx=0.4, rely=0.2)
 
     profile_last_name_label = Label(win, text=f"Last name: {last_name}")
-    profile_last_name_label.place(relx=0.4, rely=0.2)
+    profile_last_name_label.place(relx=0.6, rely=0.2)
 
     profile_date_of_birth_label = Label(win, text=f"Date of Birth: {date_of_birth}")
     profile_date_of_birth_label.place(relx=0.4, rely=0.4)
@@ -118,8 +119,14 @@ def dashboard():
     profile_password_label = Label(win, text=f"Password: {password}")
     profile_password_label.place(relx=0.6, rely=0.6)
 
-    book_appointment_button = Button(win, text='Book Appointment')
-    book_appointment_button.place(relx=0.4, rely=0.8)  ## KRISH
+    def appointment():
+        app = Label(win, text=Appointment.appointment_confirmation(aadhar_card_number))
+        app.place(relx=0.6, rely=0.8)
+        win.mainloop()
+
+    book_appointment_button = Button(win, text='Book Appointment', command=lambda: [Appointment.appointment_confirmation(aadhar_card_number),
+                                                      appointment()])
+    book_appointment_button.place(relx=0.4, rely=0.8)  
 
     history_button = Button(win, text="Medical History")
     history_button.place(relx=0.6, rely=0.8)  ## KRISH

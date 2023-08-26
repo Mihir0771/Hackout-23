@@ -53,10 +53,19 @@ def doctor_prescription():
 
     with speech_recognition.Microphone() as source:
         print('You can record the audio now')
-        voice.adjust_for_ambient_noise(source)
-        a = voice.record(source, 5)
-        b = voice.recognize_google(a)
-        print('you said', b)
+        try:
+
+            voice.adjust_for_ambient_noise(source)
+            try:
+                a = voice.record(source, 5)
+                b = voice.recognize_google(a)
+
+            except speech_recognition.exceptions.RequestError:
+                print("Can't understand you.")
+
+            print('you said', b)
+        except speech_recognition.exceptions.UnknownValueError or speech_recognition.exceptions.WaitTimeoutError:
+            print("Mic Issues")
         return b
 
 

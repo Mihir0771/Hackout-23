@@ -60,45 +60,45 @@ def sign_up():
 
     # First Name
     first_name_label = Label(root, text="First Name",font="Cambria 24 bold",bg="light green")
-    first_name_label.place(relx=0.15, rely=0.2)
+    first_name_label.place(relx=0.12, rely=0.2)
 
     first_name_entry_box = Entry(root)
-    first_name_entry_box.place(relx=0.25, rely=0.22)
+    first_name_entry_box.place(relx=0.12, rely=0.25)
 
     # Last Name
-    last_name_label = Label(root, text="Last Name",font="Cambria 24 bold",bg="light green")
+    last_name_label = Label(root, text="Last Name", font="Cambria 24 bold",bg="light green")
     last_name_label.place(relx=0.65, rely=0.2)
 
     last_name_entry_box = Entry(root)
-    last_name_entry_box.place(relx=0.75, rely=0.22)
+    last_name_entry_box.place(relx=0.65, rely=0.25)
 
     # Date of Birth
     date_of_birth_label = Label(root, text="Date of Birth", font="Cambria 24 bold", bg="light green")
-    date_of_birth_label.place(relx=0.15, rely=0.4)
+    date_of_birth_label.place(relx=0.12, rely=0.4)
 
     date_of_birth_entry_box = Entry(root)
-    date_of_birth_entry_box.place(relx=0.3, rely=0.41)
+    date_of_birth_entry_box.place(relx=0.12, rely=0.45)
 
     # Age
     age_label = Label(root, text="Age", font="Cambria 24 bold", bg="light green")
     age_label.place(relx=0.65, rely=0.4)
 
     age_entry_box = Entry(root)
-    age_entry_box.place(relx=0.72, rely=0.42)
+    age_entry_box.place(relx=0.65, rely=0.45)
 
     # Aadhar Card Number
     aadhar_card_number_label = Label(root, text="Aadhar-Card Number",font="Cambria 24 bold", bg="light green")
-    aadhar_card_number_label.place(relx=0.15, rely=0.6)
+    aadhar_card_number_label.place(relx=0.12, rely=0.6)
 
     aadhar_card_number_entry_box = Entry(root)
-    aadhar_card_number_entry_box.place(relx=0.19, rely=0.66)
+    aadhar_card_number_entry_box.place(relx=0.12, rely=0.65)
 
     # Password
     password_label = Label(root, text="Password",font="Cambria 24 bold",bg="light green")
     password_label.place(relx=0.65, rely=0.6)
 
     password_entry_box = Entry(root, show='*')
-    password_entry_box.place(relx=0.69, rely=0.66)
+    password_entry_box.place(relx=0.65, rely=0.65)
 
     # Submit Button
     submit_button = Button(root, text="Submit",font="Cambria 17 bold", command=lambda: [submit(), root.destroy()])
@@ -114,61 +114,62 @@ def dashboard():
     win.config(bg="#111111")
     win.attributes("-fullscreen", True)
 
-    profile_first_name_label = Label(win, text=f"First name: {first_name}")
-    profile_first_name_label.place(relx=0.4, rely=0.2)
+    profile_first_name_label = Label(win, text=f"First name: {first_name}", bg='#111111', fg="#00FF00", font=("Vivaldi", 35))
+    profile_first_name_label.place(relx=0.2, rely=0.2)
 
-    profile_last_name_label = Label(win, text=f"Last name: {last_name}")
-    profile_last_name_label.place(relx=0.4, rely=0.2)
+    profile_last_name_label = Label(win, text=f"Last name: {last_name}", bg='#111111', fg="#00FF00", font=("Vivaldi", 35))
+    profile_last_name_label.place(relx=0.7, rely=0.2)
 
-    profile_date_of_birth_label = Label(win, text=f"Date of Birth: {date_of_birth}")
+    profile_date_of_birth_label = Label(win, text=f"Date of Birth: {date_of_birth}", bg='#111111', fg="#00FF00", font=("Vivaldi", 35))
     profile_date_of_birth_label.place(relx=0.4, rely=0.4)
 
-    profile_age_label = Label(win, text=f"Age: {age}")
+    profile_age_label = Label(win, text=f"Age: {age}", bg='#111111', fg="#00FF00", font=("Vivaldi", 35))
     profile_age_label.place(relx=0.6, rely=0.4)
 
-    profile_aadhar_card_number_label = Label(win, text=f"Aadhar Card Number: {aadhar_card_number}")
+    profile_aadhar_card_number_label = Label(win, text=f"Aadhar Card Number: {aadhar_card_number}", font=("Vivaldi", 35), bg='#111111', fg="#00FF00")
     profile_aadhar_card_number_label.place(relx=0.4, rely=0.6)
 
-    profile_password_label = Label(win, text=f"Password: {password}")
+    profile_password_label = Label(win, text=f"Password: {password}", bg='#111111', fg="#00FF00", font=("Vivaldi", 35))
     profile_password_label.place(relx=0.6, rely=0.6)
 
-    book_appointment_button = Button(win, text='Book Appointment')
+    book_appointment_button = Button(win, text='Book Appointment', bg='#111111', fg="#00FF00", font=("Vivaldir", 35))
     book_appointment_button.place(relx=0.4, rely=0.8)  ## KRISH
-
-    history_button = Button(win, text="Medical History")
-    history_button.place(relx=0.6, rely=0.8)  ## KRISH
 
     win.mainloop()
 
 
 def login():
     def enter():
-        conn = sqlite3.connect("Patient.db")
-        c1 = conn.cursor()
+        if id_entry_box.get() != "" and password_entry_box != "":
+            conn = sqlite3.connect("Patient.db")
+            c1 = conn.cursor()
 
-        c1.execute(f"SELECT password FROM Patient WHERE aadhar_card_number = '{id_entry_box.get()}'")
+            c1.execute(f"SELECT password FROM Patient WHERE aadhar_card_number = '{id_entry_box.get()}'")
 
-        if c1.fetchall() == []:
-            messagebox.showwarning("WARNING", "Your username or password is wong")
+            if c1.fetchall() == []:
+                messagebox.showwarning("WARNING", "Your username or password is wong")
+            else:
+                dashboard()
         else:
-            dashboard()
+            messagebox.showwarning("Warning", "Please check your password and username")
 
     win = Tk()
     win.attributes("-fullscreen", True)
+    win.config(bg="#111111")
 
-    id_label = Label(win, text="ID",font="Cambria 14 bold")
+    id_label = Label(win, text="ID", font=("Cambria 14 bold", 25), fg="#00FF00",bg="#111111")
     id_label.place(relx=0.4, rely=0.4)
 
     id_entry_box = Entry(win)
     id_entry_box.place(relx=0.5, rely=0.4)
 
-    password_label = Label(win, text="Password",font="Cambria 17 bold")
-    password_label.place(relx=0.4, rely=0.6)
+    password_label = Label(win, text="Password",font=("Cambria 17 bold", 25), fg="#00FF00",bg="#111111")
+    password_label.place(relx=0.35, rely=0.6)
 
     password_entry_box = Entry(win)
     password_entry_box.place(relx=0.5, rely=0.6)
 
-    enter_button = Button(win, text="Enter", command=enter,font="Cambria 15 bold")
+    enter_button = Button(win, text="Enter", relief=RAISED, borderwidth=10, command=enter, font=("Cambria 15 bold", 25), fg="#00FF00", bg="#111111")
     enter_button.place(relx=0.5, rely=0.8)
 
     win.mainloop()

@@ -2,11 +2,19 @@ import sqlite3
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-import Appointment
 
 global password, username, age, date_of_birth, aadhar_card_number, last_name, first_name
-
-
+'''
+### When Table is deleted:- 
+        c.execute("""CREATE TABLE Patient (
+                      first_name text,
+                      last_name text,
+                      date_of_birth text,
+                      age integer,
+                      aadhar_card_number integer,
+                      password integer
+                      )""")
+'''
 # [('U', 'S', '12/08/2022', 1, 102938475638, '123')]
 
 
@@ -21,18 +29,23 @@ def sign_up():
         aadhar_card_number = aadhar_card_number_entry_box.get()
         password = password_entry_box.get()
 
+
         conn = sqlite3.connect("Patient.db")
 
-        cursor = conn.cursor()
+        c = conn.cursor()
 
-        cursor.execute(
+        conn = sqlite3.connect("Patient.db")
+
+        c = conn.cursor()
+
+        c.execute(
             "INSERT INTO Patient VALUES (:first_name, :last_name, :date_of_birth, :age, :aadhar_card_number, :password)",
-            {"first_name": first_name, "last_name": last_name, "date_of_birth": date_of_birth, "age": age,
-             "aadhar_card_number": aadhar_card_number, "password": password})
+            {'first_name': first_name, 'last_name': last_name, 'date_of_birth': date_of_birth, 'age': age,
+             'aadhar_card_number': aadhar_card_number, 'password': password})
 
-        cursor.execute("SELECT * FROM Patient")
+        c.execute("SELECT * FROM Patient")
 
-        print(cursor.fetchall())
+        print(c.fetchall())
 
         conn.commit()
 
@@ -105,7 +118,7 @@ def dashboard():
     profile_first_name_label.place(relx=0.4, rely=0.2)
 
     profile_last_name_label = Label(win, text=f"Last name: {last_name}")
-    profile_last_name_label.place(relx=0.6, rely=0.2)
+    profile_last_name_label.place(relx=0.4, rely=0.2)
 
     profile_date_of_birth_label = Label(win, text=f"Date of Birth: {date_of_birth}")
     profile_date_of_birth_label.place(relx=0.4, rely=0.4)
@@ -119,14 +132,8 @@ def dashboard():
     profile_password_label = Label(win, text=f"Password: {password}")
     profile_password_label.place(relx=0.6, rely=0.6)
 
-    def appointment():
-        app = Label(win, text=Appointment.appointment_confirmation(aadhar_card_number))
-        app.place(relx=0.6, rely=0.8)
-        win.mainloop()
-
-    book_appointment_button = Button(win, text='Book Appointment', command=lambda: [Appointment.appointment_confirmation(aadhar_card_number),
-                                                      appointment()])
-    book_appointment_button.place(relx=0.4, rely=0.8)  
+    book_appointment_button = Button(win, text='Book Appointment')
+    book_appointment_button.place(relx=0.4, rely=0.8)  ## KRISH
 
     history_button = Button(win, text="Medical History")
     history_button.place(relx=0.6, rely=0.8)  ## KRISH
@@ -137,11 +144,11 @@ def dashboard():
 def login():
     def enter():
         conn = sqlite3.connect("Patient.db")
-        cursor = conn.cursor()
+        c1 = conn.cursor()
 
-        cursor.execute(f"SELECT password FROM Patient WHERE aadhar_card_number = '{id_entry_box.get()}'")
+        c1.execute(f"SELECT password FROM Patient WHERE aadhar_card_number = '{id_entry_box.get()}'")
 
-        if cursor.fetchall() == []:
+        if c1.fetchall() == []:
             messagebox.showwarning("WARNING", "Your username or password is wong")
         else:
             dashboard()
@@ -184,3 +191,4 @@ quit_button.place(relx=0.7, rely=0.69)
 
 
 window.mainloop()
+

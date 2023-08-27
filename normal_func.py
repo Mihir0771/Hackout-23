@@ -1,4 +1,6 @@
 def body_mass_index(height, mass):  # height should be in meters and mass in Kg
+    height = float(height); mass = float(mass)
+
     bmi = mass / (height ** 2)
     if (bmi >= 18.5) and (bmi <= 24.9):
         comment = f'Weight is normal. BMI is {bmi}'
@@ -15,6 +17,8 @@ def body_mass_index(height, mass):  # height should be in meters and mass in Kg
 
 
 def blood_pressure(systole, diastole):
+    systole = float(systole); diastole=float(diastole)
+
     if (systole <= 120) and (diastole <= 80):
         comment = 'Blood Pressure is normal'
         return comment
@@ -29,7 +33,7 @@ def blood_pressure(systole, diastole):
         return comment
 
 
-def symptoms(symptom):
+def recorded_symptoms(symptom):
     import openpyxl as xl
     workbook = xl.load_workbook('symptoms.xlsx')
     sheet = workbook['Sheet1']
@@ -46,11 +50,9 @@ def symptoms(symptom):
 
 def doctor_prescription():
     import speech_recognition
-    import pyttsx3
 
-    speech = pyttsx3.init()
     voice = speech_recognition.Recognizer()
-
+    b = ''
     with speech_recognition.Microphone() as source:
         print('You can record the audio now')
         try:
@@ -69,4 +71,16 @@ def doctor_prescription():
         return b
 
 
+def new_symptom(symptom, medicine):
+    import openpyxl as xl
+
+    wb = xl.load_workbook('symptoms.xlsx')
+    sheet = wb['Sheet1']
+    max_row = sheet.max_row
+    symptom_cell = sheet.cell(max_row + 2, 1)
+    symptom_cell.value = symptom
+    medicine_cell = sheet.cell(max_row + 2, 2)
+    medicine_cell.value = medicine
+
+    wb.save('symptoms.xlsx')
 

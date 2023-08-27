@@ -60,34 +60,34 @@ def sign_up():
 
     # First Name
     first_name_label = Label(root, text="First Name",font="Cambria 24 bold",bg="light green")
-    first_name_label.place(relx=0.14, rely=0.2)
+    first_name_label.place(relx=0.15, rely=0.2)
 
     first_name_entry_box = Entry(root)
-    first_name_entry_box.place(relx=0.27, rely=0.22)
+    first_name_entry_box.place(relx=0.25, rely=0.22)
 
     # Last Name
     last_name_label = Label(root, text="Last Name",font="Cambria 24 bold",bg="light green")
     last_name_label.place(relx=0.65, rely=0.2)
 
     last_name_entry_box = Entry(root)
-    last_name_entry_box.place(relx=0.79, rely=0.22)
+    last_name_entry_box.place(relx=0.75, rely=0.22)
 
     # Date of Birth
-    date_of_birth_label = Label(root, text="Date of Birth",font="Cambria 24 bold",bg="light green")
-    date_of_birth_label.place(relx=0.12, rely=0.4)
+    date_of_birth_label = Label(root, text="Date of Birth", font="Cambria 24 bold", bg="light green")
+    date_of_birth_label.place(relx=0.15, rely=0.4)
 
     date_of_birth_entry_box = Entry(root)
     date_of_birth_entry_box.place(relx=0.3, rely=0.41)
 
     # Age
-    age_label = Label(root, text="Age",font="Cambria 24 bold",bg="light green")
+    age_label = Label(root, text="Age", font="Cambria 24 bold", bg="light green")
     age_label.place(relx=0.65, rely=0.4)
 
     age_entry_box = Entry(root)
     age_entry_box.place(relx=0.72, rely=0.42)
 
     # Aadhar Card Number
-    aadhar_card_number_label = Label(root, text="Aadhar-Card Number",font="Cambria 24 bold",bg="light green")
+    aadhar_card_number_label = Label(root, text="Aadhar-Card Number",font="Cambria 24 bold", bg="light green")
     aadhar_card_number_label.place(relx=0.15, rely=0.6)
 
     aadhar_card_number_entry_box = Entry(root)
@@ -180,15 +180,14 @@ label = Label(window,image=img)
 label.place(x=0, y=0)
 window.attributes("-fullscreen", True)
 
-login_button = Button(window, text="Login", font=("Agency FB", 26), command=lambda: [login()])
+login_button = Button(window, text="Login", font=("Agency FB", 26), fg="#00FF00", bg="#111111", padx=15, command=lambda: [login()])
 login_button.place(relx=0.7, rely=0.33)
 
-sign_up_button = Button(window, text="Sign Up", font=("Agency FB", 26), command=lambda: [sign_up()])
+sign_up_button = Button(window, text="Sign Up", font=("Agency FB", 26), fg="#00FF00", bg="#111111",padx=4, command=lambda: [sign_up()])
 sign_up_button.place(rely=0.49, relx=0.7)
 
-quit_button = Button(window, text="Quit", font=("Agency FB", 26), command=quit)
+quit_button = Button(window, text="Quit", font=("Agency FB", 26), fg="#00FF00", bg="#111111", padx=25, command=quit)
 quit_button.place(relx=0.7, rely=0.69)
 
 
 window.mainloop()
-
